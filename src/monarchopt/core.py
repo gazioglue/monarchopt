@@ -208,8 +208,7 @@ class MSO:
             butterfly_idx
         )
         
-        # Apply bounds and calculate fitness
-        new_position = np.round(np.clip(new_position, 0, 1)).astype(int)
+        # Calculate fitness        
         new_fitness = self._calculate_fitness(new_position)
         
         # Update if better
