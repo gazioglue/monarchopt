@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: monarchopt
-Version: 0.1.1
+Version: 0.1.2
 Summary: A Python implementation of Monarch Swarm Optimization algorithm
 Author-email: Emrullah Gazioglu <emrullahgazioglu@gmail.com>
 License: MIT
@@ -47,47 +47,56 @@ pip install monarchopt
 
 ## Quick Start
 
-### Basic Usage
-
 ```python
 from monarchopt import MSO
 import numpy as np
 
-def fitness(solution):
+def simple_fitness(solution):
     """Example fitness function: maximize sum of elements."""
     return np.sum(solution)
 
 MSO.run(
-    obj_func=fitness,
-    dim=20,
-    pop_size=50,
-    max_iter=100,
-    obj_type='max'
+    obj_func=simple_fitness,
+    dim=100,
+    pop_size=1000,
+    max_iter=800,
+    obj_type='max',
+    neighbour_count=3,
+    gradient_strength=0.8,
+    base_learning_rate=0.1
 )
 ```
 
-### Solving DUF Benchmark Functions
+## Test Examples and Data
 
-The package includes standalone scripts for solving DUF (Decomposable Unitation-based Functions) problems:
+To run the test examples (UFLP and DUF problems):
 
+1. Clone the GitHub repository:
 ```bash
-# Basic usage
-python solve_dufs.py duf1
-
-# With custom parameters
-python solve_dufs.py duf2 --dim 200 --pop-size 2000 --seed 42
+git clone https://github.com/gazioglue/monarchopt.git
+cd monarchopt
 ```
 
-### Solving UFLP Problems
-
-For solving Uncapacitated Facility Location Problems:
-
+2. Run UFLP solver:
 ```bash
-# Basic usage
-python solve_uflp.py cap71.txt
+python examples/solve_uflp.py examples/data/uflp/test_instances/cap71.txt
+```
 
-# With custom parameters
+3. Run DUF solver:
+```bash
+python examples/solve_dufs.py duf1
+```
+
+### Available Command Line Options
+
+For UFLP:
+```bash
 python solve_uflp.py cap71.txt --pop-size 2000 --max-iter 1000 --seed 42
+```
+
+For DUF:
+```bash
+python solve_dufs.py duf2 --dim 200 --pop-size 2000 --seed 42
 ```
 
 ## Documentation
