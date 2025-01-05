@@ -1,6 +1,6 @@
-# Monarch Swarm Optimization (MSO)
+# MonarchOpt: Monarch Butterfly Swarm Optimization
 
-A Python implementation of the Monarch Swarm Optimization algorithm, designed for solving binary optimization problems. MSO is inspired by the migration behavior of monarch butterflies and uses a novel approach combining swarm intelligence with gradient-based optimization.
+A Python implementation of the Monarch Swarm Optimization algorithm, designed for solving binary optimization problems. The algorithm is inspired by the migration behavior of monarch butterflies and uses a novel approach combining swarm intelligence with gradient-based optimization.
 
 ## Features
 
@@ -9,133 +9,63 @@ A Python implementation of the Monarch Swarm Optimization algorithm, designed fo
 - Automatic result saving and history tracking
 - Early stopping with known optimum
 - Automatic progress reporting
-- Custom problem file loading support
-- Customizable algorithm parameters
 - Built-in timeout mechanism
 - Reproducible results with seed setting
 
 ## Installation
 
-You can install MSO using pip:
-
 ```bash
-pip install monarch-swarm-optimization
+pip install monarchopt
 ```
 
 ## Quick Start
 
-Here's a simple example to get you started:
+### Basic Usage
 
 ```python
 from monarchopt import MSO
 import numpy as np
 
-def simple_fitness(solution):
+def fitness(solution):
     """Example fitness function: maximize sum of elements."""
     return np.sum(solution)
 
-# Run optimization
 MSO.run(
-    obj_func=simple_fitness,  # Your fitness function
-    dim=20,                   # Problem dimension
-    pop_size=50,              # Population size
-    max_iter=100,             # Maximum iterations
-    obj_type='max',           # Maximize the objective
-    neighbour_count=3         # Number of neighbors
-)
-```
-
-Run your script with command line options:
-```bash
-# Basic run
-python your_script.py
-
-# Save results
-python your_script.py --save-results yes
-
-# Specify results directory
-python your_script.py --save-results yes --results-dir my_results
-
-# Set random seed
-python your_script.py --seed 42
-```
-
-## Using With Problem Files
-
-For problems that require loading data from files (e.g., Multiple Knapsack Problem):
-
-```python
-from monarchopt import MSO
-import numpy as np
-from dataclasses import dataclass
-
-@dataclass
-class ProblemData:
-    """Your problem data structure."""
-    dim: int
-    weights: np.ndarray
-    # ... other problem-specific data
-
-def read_problem_file(filepath: str):
-    """Your file reading function."""
-    # Read and parse your problem file
-    data = ProblemData(...)
-    known_optimum = ...  # Optional
-    return data, known_optimum
-
-def calculate_fitness(solution, data):
-    """Your fitness calculation."""
-    # Calculate fitness using solution and problem data
-    return fitness_value
-
-# Run optimization
-MSO.run(
-    obj_func=calculate_fitness,
-    dim=None,  # Will be set from problem file
-    load_problem_file=read_problem_file,
-    known_optimum=123.45,  # Optional
-    tolerance=1e-6,        # Required if known_optimum is set
-    pop_size=100,
-    max_iter=500,
+    obj_func=fitness,
+    dim=20,
+    pop_size=50,
+    max_iter=100,
     obj_type='max'
 )
 ```
 
-## API Reference
+### Solving DUF Benchmark Functions
 
-### Main Parameters
+The package includes standalone scripts for solving DUF (Decomposable Unitation-based Functions) problems:
 
-Required:
-- `obj_func`: Objective function to optimize
-- `dim`: Problem dimension (or None if using problem file)
-- `pop_size`: Population size (>0)
-- `max_iter`: Maximum iterations (>0)
-- `obj_type`: 'min' or 'max'
-- `neighbour_count`: Number of neighbors (1 <= n < pop_size)
+```bash
+# Basic usage
+python solve_dufs.py duf1
 
-Optional:
-- `load_problem_file`: Function to load problem data
-- `gradient_strength`: Gradient influence (0-1, default=0.8)
-- `base_learning_rate`: Learning rate (0-1, default=0.1)
-- `known_optimum`: Known optimal value
-- `tolerance`: Convergence tolerance
-- `timeout`: Maximum runtime in seconds
-- `seed`: Random seed for reproducibility
+# With custom parameters
+python solve_dufs.py duf2 --dim 200 --pop-size 2000 --seed 42
+```
 
-### Command Line Arguments
+### Solving UFLP Problems
 
-- `--save-results`: Whether to save results ('yes' or 'no', default='no')
-- `--results-dir`: Directory to save results (default='results')
-- `--seed`: Random seed for reproducibility
+For solving Uncapacitated Facility Location Problems:
 
-## Examples
+```bash
+# Basic usage
+python solve_uflp.py cap71.txt
 
-The package includes several example implementations:
+# With custom parameters
+python solve_uflp.py cap71.txt --pop-size 2000 --max-iter 1000 --seed 42
+```
 
-1. Basic binary optimization
-2. Multiple Knapsack Problem (MKP)
+## Documentation
 
-Check the `examples/` directory in the repository for complete examples.
+For more detailed usage instructions and examples, see [USAGE.md](USAGE.md).
 
 ## Contributing
 
