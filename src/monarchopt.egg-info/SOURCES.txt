@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/monarchopt/__init__.py
+src/monarchopt/core.py
+src/monarchopt/exceptions.py
+src/monarchopt/utils.py
+src/monarchopt/validators.py
+src/monarchopt.egg-info/PKG-INFO
+src/monarchopt.egg-info/SOURCES.txt
+src/monarchopt.egg-info/dependency_links.txt
+src/monarchopt.egg-info/requires.txt
+src/monarchopt.egg-info/top_level.txt
+tests/test_core.py

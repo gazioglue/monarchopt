@@ -1,6 +1,7 @@
 import numpy as np
 import time
 from typing import Callable, Optional, Tuple, Dict, Any, Union
+from pathlib import Path
 from .exceptions import OptimizationError, ConvergenceError, TimeoutError
 from .validators import validate_parameters
 
