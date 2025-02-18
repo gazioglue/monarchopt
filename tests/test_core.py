@@ -2,8 +2,8 @@
 
 import unittest
 import numpy as np
-from mso import MSO
-from mso.exceptions import ValidationError, OptimizationError, TimeoutError
+from monarchopt import MSO
+from monarchopt.exceptions import ValidationError, OptimizationError, TimeoutError
 
 class TestMSO(unittest.TestCase):
     """Test cases for MSO algorithm."""

@@ -102,18 +102,10 @@ class MSO:
             dim: Problem dimension
             **kwargs: Additional arguments to pass to MSO constructor
         """
-        from .utils import get_cli_args
         
-        # Get command line arguments
-        args = get_cli_args()
-        
-        # Create optimizer
         optimizer = cls(
             obj_func=obj_func,
             dim=dim,
-            save_results=args.save_results == 'yes',
-            results_dir=args.results_dir,
-            seed=args.seed,
             **kwargs
         )
         

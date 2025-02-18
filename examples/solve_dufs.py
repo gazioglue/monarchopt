@@ -90,8 +90,8 @@ DUF_FUNCTIONS = {
 
 def main():
     parser = argparse.ArgumentParser(description='Solve DUF problems using Monarch Swarm Optimization')
-    parser.add_argument('duf', type=str, choices=list(DUF_FUNCTIONS.keys()),
-                       help='DUF function to solve')
+    #parser.add_argument('duf', type=str, choices=list(DUF_FUNCTIONS.keys()),
+     #                  help='DUF function to solve')
     parser.add_argument('--dim', type=int, default=100,
                        help='Problem dimension (must be divisible by 4 for DUF2-4)')
     parser.add_argument('--pop-size', type=int, default=1000,
@@ -107,7 +107,17 @@ def main():
     parser.add_argument('--seed', type=int, help='Random seed')
     parser.add_argument('--save-results', choices=['yes', 'no'], default='yes',
                        help='Save results to file')
+    
+    parser.add_argument('duf', type=str, help='DUF function to solve (duf1, duf2, duf3, duf4)')
+
+
+
     args = parser.parse_args()
+
+    # DUF fonksiyonunu seç
+    duf_num = int(args.duf.lower().replace('duf', ''))
+    if duf_num not in [1, 2, 3, 4]:
+        raise ValueError("DUF function must be one of: duf1, duf2, duf3, duf4")
     
     # Get selected DUF function
     duf_func = DUF_FUNCTIONS[args.duf]
@@ -122,7 +132,6 @@ def main():
         known_optimum = args.dim  # All ones
     else:
         known_optimum = (args.dim // 4) * 4  # Maximum possible value
-    
     # Run optimization
     MSO.run(
         obj_func=duf_func,

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.3] - 2025-02-18
+### Fixed
+- Fixed some argparse issues
+
 ## [0.1.2] - 2024-01-05
 ### Changed
 - Updated documentation with example usage and test data instructions
